@@ -14,8 +14,8 @@ import {KeyValue} from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  mqttEndpoint: string = 'http://localhost:3000/api/v1/sensors/air-quality/latestData/mqtt';
-  core2Endpoint: string = 'http://localhost:3000/api/v1/sensors/air-quality/latestData/core2';
+  mqttEndpoint: string = 'https://p2p-as3.onrender.com/api/v1/sensors/air-quality/latestData/mqtt';
+  core2Endpoint: string = 'https://p2p-as3.onrender.com/api/v1/sensors/air-quality/latestData/core2';
   latestMqttData: {[p:string]: any} = {};
   latestCore2Data: {[p:string]: any} = {};
   errorMqtt = false;
