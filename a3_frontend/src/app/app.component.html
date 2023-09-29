@@ -1,0 +1,34 @@
+<h1>Daring Do awesome IoT measuring data displaying tool!!!!!!</h1>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="16px">
+  <!-- Left Grid Element -->
+  <div fxFlex="50%" fxFlex.xs="100%">
+    <mat-card>
+      <mat-card-content>
+        <h3>Latest values from MQTT broker. Data from: {{latestMqttData['timestamp']}}</h3>
+        <div class="scrollable-list">
+          <mat-list>
+            <mat-list-item *ngFor="let item of latestMqttData | keyvalue">
+              <p *ngIf="labels[item.key]" mat-line>{{labels[item.key]}}: {{ item.value }}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Right Grid Element -->
+  <div fxFlex="50%" fxFlex.xs="100%">
+    <mat-card>
+      <mat-card-content>
+        <h3>Latest values from core2 device via POST request. Data from: {{latestCore2Data['timestamp']}}</h3>
+        <div class="scrollable-list">
+          <mat-list>
+            <mat-list-item *ngFor="let item of latestCore2Data | keyvalue">
+              <p *ngIf="labels[item.key]" mat-line>{{labels[item.key]}}: {{ item.value }}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

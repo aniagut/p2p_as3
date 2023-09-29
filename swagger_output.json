@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/air-quality/": {
+      "post": {
+        "description": "Post data about TVOC and eCO2 values from Core2",
+        "parameters": [
+          {
+            "name": "sensorData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "example": "2023-09-22T14:30:00Z"
+                },
+                "tvoc": {
+                  "type": "number",
+                  "example": 50
+                },
+                "tvoc_min": {
+                  "type": "number",
+                  "example": 30
+                },
+                "tvoc_max": {
+                  "type": "number",
+                  "example": 70
+                },
+                "tvoc_avg": {
+                  "type": "number",
+                  "example": 50
+                },
+                "eco2": {
+                  "type": "number",
+                  "example": 400
+                },
+                "eco2_min": {
+                  "type": "number",
+                  "example": 300
+                },
+                "eco2_max": {
+                  "type": "number",
+                  "example": 500
+                },
+                "eco2_avg": {
+                  "type": "number",
+                  "example": 400
+                }
+              },
+              "required": [
+                "timestamp",
+                "tvoc",
+                "tvoc_min",
+                "tvoc_max",
+                "tvoc_avg",
+                "eco2",
+                "eco2_min",
+                "eco2_max",
+                "eco2_avg"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/air-quality/eco2": {
+      "get": {
+        "description": "Get most recent data about eCO2 values from Core2 senting it to the MQTT broker.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/air-quality/tvoc": {
+      "get": {
+        "description": "Get most recent data about TVOC values from Core2 senting it to the MQTT broker.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/air-quality/latestData/{type?}": {
+      "get": {
+        "description": "Get most recent complete data from Core2 or MQTT depending on `type` parameter.",
+        "parameters": [
+          {
+            "name": "type?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "example": "2023-09-22T14:30:00Z"
+                },
+                "tvoc": {
+                  "type": "number",
+                  "example": 50
+                },
+                "tvoc_min": {
+                  "type": "number",
+                  "example": 30
+                },
+                "tvoc_max": {
+                  "type": "number",
+                  "example": 70
+                },
+                "tvoc_avg": {
+                  "type": "number",
+                  "example": 50
+                },
+                "eco2": {
+                  "type": "number",
+                  "example": 400
+                },
+                "eco2_min": {
+                  "type": "number",
+                  "example": 300
+                },
+                "eco2_max": {
+                  "type": "number",
+                  "example": 500
+                },
+                "eco2_avg": {
+                  "type": "number",
+                  "example": 400
+                },
+                "origin": {
+                  "type": "string",
+                  "example": "mqtt"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}
